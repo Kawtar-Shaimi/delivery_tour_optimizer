@@ -1,6 +1,5 @@
 package com.dto.delivery_tour_optimizer.model;
 
-import com.dto.delivery_tour_optimizer.model.enums.VehicleType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.Id;
