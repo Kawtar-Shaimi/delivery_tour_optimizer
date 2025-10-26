@@ -1,5 +1,6 @@
 package com.dto.delivery_tour_optimizer.model;
 
+import com.dto.delivery_tour_optimizer.model.enums.DeliveryStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
