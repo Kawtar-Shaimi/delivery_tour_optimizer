@@ -7,7 +7,4 @@ import java.util.List;
 
 public interface TourOptimizer {
     List<Delivery> calculateOptimalTour(List<Delivery> deliveries, Warehouse warehouse, Vehicle vehicle);
-
-    // Méthode utilitaire pour calculer la distance totale
-    double calculateTotalDistance(List<Delivery> route, Warehouse warehouse);
 }
