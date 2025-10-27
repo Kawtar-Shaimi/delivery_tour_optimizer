@@ -31,3 +31,18 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Fichiers de configuration sécurisés
+application-secure.properties
+application-prod.properties
+*.env
+
+# Clés et certificats
+*.key
+*.p12
+*.jks
+*.pem
+
+# Fichiers sensibles personnalisés
+config/secure/
+secrets/
