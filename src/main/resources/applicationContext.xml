@@ -2,10 +2,16 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/data/jpa
-                           http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+                           http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Activation du scan des composants (nécessaire pour les contrôleurs REST) -->
+    <context:component-scan base-package="com.dto.delivery_tour_optimizer.controller"/>
 
     <!-- Activation des repositories JPA -->
     <jpa:repositories base-package="com.dto.delivery_tour_optimizer.repository"/>
@@ -34,6 +40,24 @@
         <property name="warehouseRepository" ref="warehouseRepository"/>
         <property name="nearestNeighborOptimizer" ref="nearestNeighborOptimizer"/>
         <property name="clarkeWrightOptimizer" ref="clarkeWrightOptimizer"/>
+    </bean>
+
+    <!-- IMPORTANT: Déclaration explicite des contrôleurs avec injection par constructeur -->
+    <bean id="deliveryController" class="com.dto.delivery_tour_optimizer.controller.DeliveryController">
+        <constructor-arg ref="deliveryService"/>
+    </bean>
+
+    <bean id="vehicleController" class="com.dto.delivery_tour_optimizer.controller.VehicleController">
+        <constructor-arg ref="vehicleService"/>
+    </bean>
+
+    <bean id="warehouseController" class="com.dto.delivery_tour_optimizer.controller.WarehouseController">
+        <constructor-arg ref="warehouseService"/>
+    </bean>
+
+    <bean id="tourController" class="com.dto.delivery_tour_optimizer.controller.TourController">
+        <constructor-arg ref="tourService"/>
+        <constructor-arg ref="warehouseService"/>
     </bean>
 
 </beans>
