@@ -27,6 +27,24 @@ public class TourService {
                 .orElseThrow(() -> new RuntimeException("Entrepôt non trouvé"));
         List<Delivery> deliveries = deliveryRepository.findAllById(request.getDeliveryIds());
 
+        // VÉRIFIER LES CONTRAINTES AVANT l'optimisation
+        // 1. Vérifier le nombre de livraisons
+        if (deliveries.size() > vehicle.getMaxDeliveries()) {
+            throw new RuntimeException("Trop de livraisons pour ce véhicule. Maximum: " + vehicle.getMaxDeliveries());
+        }
+
+        // 2. Vérifier le poids total
+        double totalWeight = deliveries.stream().mapToDouble(Delivery::getWeight).sum();
+        if (totalWeight > vehicle.getMaxWeight()) {
+            throw new RuntimeException("Poids total trop élevé pour ce véhicule. Maximum: " + vehicle.getMaxWeight() + " kg");
+        }
+
+        // 3. Vérifier le volume total
+        double totalVolume = deliveries.stream().mapToDouble(Delivery::getVolume).sum();
+        if (totalVolume > vehicle.getMaxVolume()) {
+            throw new RuntimeException("Volume total trop élevé pour ce véhicule. Maximum: " + vehicle.getMaxVolume() + " m³");
+        }
+
         // Choisir l'algorithme
         TourOptimizer optimizer = request.getOptimizerType().equals("NEAREST_NEIGHBOR")
                 ? nearestNeighborOptimizer
