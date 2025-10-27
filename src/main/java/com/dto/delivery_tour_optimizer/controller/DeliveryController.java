@@ -7,23 +7,21 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/api/deliveries")
+// NOTE: Pas d'annotation @RestController - géré par XML
 public class DeliveryController {
 
     private final DeliveryService deliveryService;
 
-    // Injection via constructeur (plus propre)
     public DeliveryController(DeliveryService deliveryService) {
         this.deliveryService = deliveryService;
     }
 
-    @GetMapping
+    @RequestMapping("/api/deliveries")
     public List<Delivery> getAllDeliveries() {
         return deliveryService.getAllDeliveries();
     }
 
-    @GetMapping("/{id}")
+    @RequestMapping("/api/deliveries/{id}")
     public ResponseEntity<Delivery> getDeliveryById(@PathVariable Long id) {
         try {
             Delivery delivery = deliveryService.getDeliveryById(id);
@@ -33,16 +31,16 @@ public class DeliveryController {
         }
     }
 
-    @PostMapping
+    @RequestMapping(value = "/api/deliveries", method = RequestMethod.POST)
     public Delivery createDelivery(@RequestBody Delivery delivery) {
         return deliveryService.saveDelivery(delivery);
     }
 
-    @PutMapping("/{id}")
+    @RequestMapping(value = "/api/deliveries/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Delivery> updateDelivery(@PathVariable Long id, @RequestBody Delivery delivery) {
         try {
             Delivery existingDelivery = deliveryService.getDeliveryById(id);
-            delivery.setId(id); // S'assurer que l'ID est conservé
+            delivery.setId(id);
             Delivery updatedDelivery = deliveryService.saveDelivery(delivery);
             return ResponseEntity.ok(updatedDelivery);
         } catch (RuntimeException e) {
@@ -50,7 +48,7 @@ public class DeliveryController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @RequestMapping(value = "/api/deliveries/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteDelivery(@PathVariable Long id) {
         try {
             deliveryService.deleteDelivery(id);
