@@ -10,7 +10,7 @@
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- Activation du scan des composants (nécessaire pour les contrôleurs REST) -->
+    <!-- Activation du scan pour les annotations @RequestMapping -->
     <context:component-scan base-package="com.dto.delivery_tour_optimizer.controller"/>
 
     <!-- Activation des repositories JPA -->
@@ -42,7 +42,7 @@
         <property name="clarkeWrightOptimizer" ref="clarkeWrightOptimizer"/>
     </bean>
 
-    <!-- IMPORTANT: Déclaration explicite des contrôleurs avec injection par constructeur -->
+    <!-- Déclaration des Controllers -->
     <bean id="deliveryController" class="com.dto.delivery_tour_optimizer.controller.DeliveryController">
         <constructor-arg ref="deliveryService"/>
     </bean>
