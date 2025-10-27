@@ -2,18 +2,30 @@ package com.dto.delivery_tour_optimizer.controller;
 
 import com.dto.delivery_tour_optimizer.model.Delivery;
 import com.dto.delivery_tour_optimizer.service.DeliveryService;
+import com.dto.delivery_tour_optimizer.service.TourService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-// NOTE: Pas d'annotation @RestController - géré par XML
 public class DeliveryController {
 
-    private final DeliveryService deliveryService;
+    private DeliveryService deliveryService;
+    private TourService tourService;
 
-    public DeliveryController(DeliveryService deliveryService) {
+    // CONSTRUCTEUR SANS PARAMÈTRES obligatoire pour XML
+    public DeliveryController() {}
+
+    // SETTERS pour l'injection XML
+    public void setDeliveryService(DeliveryService deliveryService) {
         this.deliveryService = deliveryService;
+    }
+
+    public void setTourService(TourService tourService) {
+        this.tourService = tourService;
     }
 
     @RequestMapping("/api/deliveries")

@@ -3,15 +3,22 @@ package com.dto.delivery_tour_optimizer.controller;
 import com.dto.delivery_tour_optimizer.model.Warehouse;
 import com.dto.delivery_tour_optimizer.service.WarehouseService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
 public class WarehouseController {
 
-    private final WarehouseService warehouseService;
+    private WarehouseService warehouseService;
 
-    public WarehouseController(WarehouseService warehouseService) {
+    // CONSTRUCTEUR SANS PARAMÈTRES obligatoire pour XML
+    public WarehouseController() {}
+
+    // SETTER pour l'injection XML
+    public void setWarehouseService(WarehouseService warehouseService) {
         this.warehouseService = warehouseService;
     }
 

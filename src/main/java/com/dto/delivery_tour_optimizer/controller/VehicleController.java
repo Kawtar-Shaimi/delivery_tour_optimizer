@@ -4,15 +4,23 @@ import com.dto.delivery_tour_optimizer.model.Vehicle;
 import com.dto.delivery_tour_optimizer.model.enums.VehicleType;
 import com.dto.delivery_tour_optimizer.service.VehicleService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 public class VehicleController {
 
-    private final VehicleService vehicleService;
+    private VehicleService vehicleService;
 
-    public VehicleController(VehicleService vehicleService) {
+    // CONSTRUCTEUR SANS PARAMÈTRES obligatoire pour XML
+    public VehicleController() {}
+
+    // SETTER pour l'injection XML
+    public void setVehicleService(VehicleService vehicleService) {
         this.vehicleService = vehicleService;
     }
 

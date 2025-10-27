@@ -5,8 +5,11 @@ import com.dto.delivery_tour_optimizer.model.Delivery;
 import com.dto.delivery_tour_optimizer.model.Warehouse;
 import com.dto.delivery_tour_optimizer.service.TourService;
 import com.dto.delivery_tour_optimizer.service.WarehouseService;
+import com.dto.delivery_tour_optimizer.service.VehicleService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -14,8 +17,9 @@ public class TourController {
 
     private TourService tourService;
     private WarehouseService warehouseService;
+    private VehicleService vehicleService;
 
-    // CONSTRUCTEUR SANS PARAMÈTRES pour l'injection XML
+    // CONSTRUCTEUR SANS PARAMÈTRES obligatoire pour XML
     public TourController() {}
 
     // SETTERS pour l'injection XML
@@ -25,6 +29,10 @@ public class TourController {
 
     public void setWarehouseService(WarehouseService warehouseService) {
         this.warehouseService = warehouseService;
+    }
+
+    public void setVehicleService(VehicleService vehicleService) {
+        this.vehicleService = vehicleService;
     }
 
     @RequestMapping(value = "/api/tours/optimize", method = RequestMethod.POST)
