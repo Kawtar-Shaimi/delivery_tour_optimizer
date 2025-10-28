@@ -20,7 +20,7 @@
     <!-- Déclaration des Optimizers -->
     <bean id="clarkeWrightOptimizer" class="com.dto.delivery_tour_optimizer.service.ClarkeWrightOptimizer"/>
     <bean id="nearestNeighborOptimizer" class="com.dto.delivery_tour_optimizer.service.NearestNeighborOptimizer"/>
-    <bean id="tourOptimizer" class="com.dto.delivery_tour_optimizer.service.TourOptimizer"/>
+    <bean id="tourOptimizer" class="com.dto.delivery_tour_optimizer.service.TourOptimizer" abstract="true"/>
     <bean id="distanceUtils" class="com.dto.delivery_tour_optimizer.service.DistanceUtils"/>
 
     <!-- Déclaration des Contrôleurs avec injections -->
