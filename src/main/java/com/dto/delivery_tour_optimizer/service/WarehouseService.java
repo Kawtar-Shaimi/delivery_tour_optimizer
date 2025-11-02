@@ -10,6 +10,9 @@ public class WarehouseService {
 
     public WarehouseService() {}
 
+    public WarehouseService(WarehouseRepository warehouseRepository) {
+    }
+
     public List<Warehouse> getAllWarehouses() {
         return warehouseRepository.findAll();
     }

@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
-                           http://www.springframework.org/schema/context
-                           http://www.springframework.org/schema/context/spring-context.xsd
                            http://www.springframework.org/schema/data/jpa
                            http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-    <!-- SCAN DES REPOSITORIES JPA -->
+    <!-- Repositories JPA -->
     <jpa:repositories base-package="com.dto.delivery_tour_optimizer.repository"/>
 
     <!-- OPTIMIZERS -->
@@ -19,15 +16,15 @@
 
     <!-- SERVICES -->
     <bean id="deliveryService" class="com.dto.delivery_tour_optimizer.service.DeliveryService">
-        <property name="deliveryRepository" ref="deliveryRepository"/>
+        <constructor-arg ref="deliveryRepository"/>
     </bean>
 
     <bean id="vehicleService" class="com.dto.delivery_tour_optimizer.service.VehicleService">
-        <property name="vehicleRepository" ref="vehicleRepository"/>
+        <constructor-arg ref="vehicleRepository"/>
     </bean>
 
     <bean id="warehouseService" class="com.dto.delivery_tour_optimizer.service.WarehouseService">
-        <property name="warehouseRepository" ref="warehouseRepository"/>
+        <constructor-arg ref="warehouseRepository"/>
     </bean>
 
     <bean id="tourService" class="com.dto.delivery_tour_optimizer.service.TourService">
@@ -39,23 +36,4 @@
         <property name="clarkeWrightOptimizer" ref="clarkeWrightOptimizer"/>
     </bean>
 
-    <!-- CONTROLLERS -->
-    <bean id="deliveryController" class="com.dto.delivery_tour_optimizer.controller.DeliveryController">
-        <property name="deliveryService" ref="deliveryService"/>
-        <property name="tourService" ref="tourService"/>
-    </bean>
-
-    <bean id="vehicleController" class="com.dto.delivery_tour_optimizer.controller.VehicleController">
-        <property name="vehicleService" ref="vehicleService"/>
-    </bean>
-
-    <bean id="warehouseController" class="com.dto.delivery_tour_optimizer.controller.WarehouseController">
-        <property name="warehouseService" ref="warehouseService"/>
-    </bean>
-
-    <bean id="tourController" class="com.dto.delivery_tour_optimizer.controller.TourController">
-        <property name="tourService" ref="tourService"/>
-        <property name="warehouseService" ref="warehouseService"/>
-        <property name="vehicleService" ref="vehicleService"/>
-    </bean>
 </beans>

@@ -16,6 +16,9 @@ public class TourController {
 
     public TourController() {}
 
+    public TourController(TourService tourService) {
+    }
+
     public void setTourService(TourService tourService) {
         this.tourService = tourService;
     }

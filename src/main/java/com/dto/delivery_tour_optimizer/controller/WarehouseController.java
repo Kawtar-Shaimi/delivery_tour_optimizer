@@ -15,6 +15,9 @@ public class WarehouseController {
 
     public WarehouseController() {}
 
+    public WarehouseController(WarehouseService warehouseService) {
+    }
+
     public void setWarehouseService(WarehouseService warehouseService) {
         this.warehouseService = warehouseService;
     }

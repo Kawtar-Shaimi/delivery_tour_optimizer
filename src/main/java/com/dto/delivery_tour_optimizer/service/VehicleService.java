@@ -11,6 +11,9 @@ public class VehicleService {
 
     public VehicleService() {}
 
+    public VehicleService(VehicleRepository vehicleRepository) {
+    }
+
     public List<Vehicle> getAllVehicles() {
         return vehicleRepository.findAll();
     }

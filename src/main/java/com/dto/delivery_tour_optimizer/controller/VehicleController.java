@@ -15,6 +15,9 @@ public class VehicleController {
 
     public VehicleController() {}
 
+    public VehicleController(VehicleService vehicleService) {
+    }
+
     public void setVehicleService(VehicleService vehicleService) {
         this.vehicleService = vehicleService;
     }

@@ -10,6 +10,9 @@ public class DeliveryService {
 
     public DeliveryService() {}
 
+    public DeliveryService(DeliveryRepository deliveryRepository) {
+    }
+
     public List<Delivery> getAllDeliveries() {
         return deliveryRepository.findAll();
     }
