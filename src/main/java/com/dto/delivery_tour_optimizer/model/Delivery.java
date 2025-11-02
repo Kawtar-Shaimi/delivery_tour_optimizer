@@ -31,6 +31,4 @@ public class Delivery {
     @ManyToOne
     @JoinColumn(name = "tour_id")
     private Tour tour;
-
-    // SUPPRIMER les méthodes calculateDistanceTo et calculateDistanceFromWarehouse - elles iront dans le service
 }

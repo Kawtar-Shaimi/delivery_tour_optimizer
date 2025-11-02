@@ -4,33 +4,37 @@ import com.dto.delivery_tour_optimizer.model.Delivery;
 import com.dto.delivery_tour_optimizer.model.Vehicle;
 import com.dto.delivery_tour_optimizer.model.Warehouse;
 import java.util.*;
+import java.util.logging.Logger;
 
 public class NearestNeighborOptimizer implements TourOptimizer {
 
+    // Logger simple
+    private static final Logger logger = Logger.getLogger(NearestNeighborOptimizer.class.getName());
+
     @Override
     public List<Delivery> calculateOptimalTour(List<Delivery> deliveries, Warehouse warehouse, Vehicle vehicle) {
-        if (deliveries.isEmpty()) return new ArrayList<>();
+        logger.info("🚀 Début de l'optimisation Nearest Neighbor - " + deliveries.size() + " livraisons");
+
+        if (deliveries.isEmpty()) {
+            logger.warning("⚠️ Liste de livraisons vide");
+            return new ArrayList<>();
+        }
 
         List<Delivery> result = new ArrayList<>();
         List<Delivery> remaining = new ArrayList<>(deliveries);
 
-        // Point de départ : l'entrepôt
         double currentLat = warehouse.getLatitude();
         double currentLon = warehouse.getLongitude();
 
         while (!remaining.isEmpty()) {
-            // Trouver la livraison la plus proche
             Delivery nearest = findNearest(currentLat, currentLon, remaining);
-
-            // L'ajouter au résultat
             result.add(nearest);
             remaining.remove(nearest);
-
-            // Mettre à jour la position actuelle
             currentLat = nearest.getLatitude();
             currentLon = nearest.getLongitude();
         }
 
+        logger.info("✅ Optimisation Nearest Neighbor terminée - " + result.size() + " livraisons organisées");
         return result;
     }
 

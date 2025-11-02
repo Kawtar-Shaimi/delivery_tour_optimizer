@@ -2,38 +2,29 @@ package com.dto.delivery_tour_optimizer.controller;
 
 import com.dto.delivery_tour_optimizer.model.Delivery;
 import com.dto.delivery_tour_optimizer.service.DeliveryService;
-import com.dto.delivery_tour_optimizer.service.TourService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/api/deliveries")
 public class DeliveryController {
 
     private DeliveryService deliveryService;
-    private TourService tourService;
 
-    // CONSTRUCTEUR SANS PARAMÈTRES obligatoire pour XML
     public DeliveryController() {}
 
-    // SETTERS pour l'injection XML
     public void setDeliveryService(DeliveryService deliveryService) {
         this.deliveryService = deliveryService;
     }
 
-    public void setTourService(TourService tourService) {
-        this.tourService = tourService;
-    }
-
-    @RequestMapping("/api/deliveries")
+    @GetMapping
     public List<Delivery> getAllDeliveries() {
         return deliveryService.getAllDeliveries();
     }
 
-    @RequestMapping("/api/deliveries/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Delivery> getDeliveryById(@PathVariable Long id) {
         try {
             Delivery delivery = deliveryService.getDeliveryById(id);
@@ -43,15 +34,14 @@ public class DeliveryController {
         }
     }
 
-    @RequestMapping(value = "/api/deliveries", method = RequestMethod.POST)
+    @PostMapping
     public Delivery createDelivery(@RequestBody Delivery delivery) {
         return deliveryService.saveDelivery(delivery);
     }
 
-    @RequestMapping(value = "/api/deliveries/{id}", method = RequestMethod.PUT)
+    @PutMapping("/{id}")
     public ResponseEntity<Delivery> updateDelivery(@PathVariable Long id, @RequestBody Delivery delivery) {
         try {
-            Delivery existingDelivery = deliveryService.getDeliveryById(id);
             delivery.setId(id);
             Delivery updatedDelivery = deliveryService.saveDelivery(delivery);
             return ResponseEntity.ok(updatedDelivery);
@@ -60,7 +50,7 @@ public class DeliveryController {
         }
     }
 
-    @RequestMapping(value = "/api/deliveries/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDelivery(@PathVariable Long id) {
         try {
             deliveryService.deleteDelivery(id);

@@ -27,7 +27,7 @@ public class DeliveryService {
         deliveryRepository.deleteById(id);
     }
 
-    // Setter pour l'injection XML
+    // AJOUTER CE SETTER POUR L'INJECTION XML
     public void setDeliveryRepository(DeliveryRepository deliveryRepository) {
         this.deliveryRepository = deliveryRepository;
     }

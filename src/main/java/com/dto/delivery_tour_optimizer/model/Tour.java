@@ -31,6 +31,4 @@ public class Tour {
     @OneToMany(mappedBy = "tour", cascade = CascadeType.ALL)
     @OrderBy("deliveryOrder ASC")
     private List<Delivery> deliveries = new ArrayList<>();
-
-    // SUPPRIMER les méthodes getTotalWeight et getTotalVolume - elles iront dans le service
 }

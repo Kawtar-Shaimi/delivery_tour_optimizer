@@ -4,14 +4,25 @@ import com.dto.delivery_tour_optimizer.model.Delivery;
 import com.dto.delivery_tour_optimizer.model.Vehicle;
 import com.dto.delivery_tour_optimizer.model.Warehouse;
 import java.util.*;
+import java.util.logging.Logger;
 
 public class ClarkeWrightOptimizer implements TourOptimizer {
 
+    // Logger simple
+    private static final Logger logger = Logger.getLogger(ClarkeWrightOptimizer.class.getName());
+
     @Override
     public List<Delivery> calculateOptimalTour(List<Delivery> deliveries, Warehouse warehouse, Vehicle vehicle) {
-        if (deliveries.isEmpty()) return new ArrayList<>();
+        logger.info("🚀 Début de l'optimisation Clarke & Wright - " + deliveries.size() + " livraisons");
 
-        // Étape 1: Calculer les "économies" pour chaque paire
+        if (deliveries.isEmpty()) {
+            logger.warning("⚠️ Liste de livraisons vide");
+            return new ArrayList<>();
+        }
+
+        // APPROCHE SIMPLIFIÉE
+        logger.info("📊 Calcul des économies pour " + deliveries.size() + " livraisons");
+
         List<DeliveryPair> pairs = new ArrayList<>();
 
         for (int i = 0; i < deliveries.size(); i++) {
@@ -27,23 +38,23 @@ public class ClarkeWrightOptimizer implements TourOptimizer {
             }
         }
 
-        // Étape 2: Trier par économie décroissante
+        logger.info("📈 " + pairs.size() + " paires d'économies calculées");
+
         pairs.sort((p1, p2) -> Double.compare(p2.saving, p1.saving));
 
-        // Étape 3: Construire la route en partant de la meilleure paire
-        return buildSimpleRoute(pairs, deliveries);
+        List<Delivery> result = buildSimpleRoute(pairs, deliveries);
+        logger.info("✅ Optimisation Clarke & Wright terminée - " + result.size() + " livraisons organisées");
+        return result;
     }
 
     private List<Delivery> buildSimpleRoute(List<DeliveryPair> pairs, List<Delivery> allDeliveries) {
         if (pairs.isEmpty()) return new ArrayList<>(allDeliveries);
 
-        // On prend la meilleure paire comme base
         DeliveryPair bestPair = pairs.get(0);
         List<Delivery> route = new ArrayList<>();
         route.add(bestPair.delivery1);
         route.add(bestPair.delivery2);
 
-        // On ajoute les autres livraisons dans l'ordre des économies
         Set<Delivery> added = new HashSet<>();
         added.add(bestPair.delivery1);
         added.add(bestPair.delivery2);

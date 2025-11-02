@@ -3,31 +3,28 @@ package com.dto.delivery_tour_optimizer.controller;
 import com.dto.delivery_tour_optimizer.model.Warehouse;
 import com.dto.delivery_tour_optimizer.service.WarehouseService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/api/warehouses")
 public class WarehouseController {
 
     private WarehouseService warehouseService;
 
-    // CONSTRUCTEUR SANS PARAMÈTRES obligatoire pour XML
     public WarehouseController() {}
 
-    // SETTER pour l'injection XML
     public void setWarehouseService(WarehouseService warehouseService) {
         this.warehouseService = warehouseService;
     }
 
-    @RequestMapping("/api/warehouses")
+    @GetMapping
     public List<Warehouse> getAllWarehouses() {
         return warehouseService.getAllWarehouses();
     }
 
-    @RequestMapping("/api/warehouses/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Warehouse> getWarehouseById(@PathVariable Long id) {
         try {
             Warehouse warehouse = warehouseService.getWarehouseById(id);
@@ -37,15 +34,14 @@ public class WarehouseController {
         }
     }
 
-    @RequestMapping(value = "/api/warehouses", method = RequestMethod.POST)
+    @PostMapping
     public Warehouse createWarehouse(@RequestBody Warehouse warehouse) {
         return warehouseService.saveWarehouse(warehouse);
     }
 
-    @RequestMapping(value = "/api/warehouses/{id}", method = RequestMethod.PUT)
+    @PutMapping("/{id}")
     public ResponseEntity<Warehouse> updateWarehouse(@PathVariable Long id, @RequestBody Warehouse warehouse) {
         try {
-            Warehouse existingWarehouse = warehouseService.getWarehouseById(id);
             warehouse.setId(id);
             Warehouse updatedWarehouse = warehouseService.saveWarehouse(warehouse);
             return ResponseEntity.ok(updatedWarehouse);
@@ -54,7 +50,7 @@ public class WarehouseController {
         }
     }
 
-    @RequestMapping(value = "/api/warehouses/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteWarehouse(@PathVariable Long id) {
         try {
             warehouseService.deleteWarehouse(id);
