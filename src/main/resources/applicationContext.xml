@@ -7,9 +7,6 @@
                            http://www.springframework.org/schema/data/jpa
                            http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
 
-    <!-- Repositories JPA -->
-    <jpa:repositories base-package="com.dto.delivery_tour_optimizer.repository"/>
-
     <!-- OPTIMIZERS -->
     <bean id="nearestNeighborOptimizer" class="com.dto.delivery_tour_optimizer.service.NearestNeighborOptimizer"/>
     <bean id="clarkeWrightOptimizer" class="com.dto.delivery_tour_optimizer.service.ClarkeWrightOptimizer"/>
