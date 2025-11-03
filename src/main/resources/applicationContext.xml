@@ -16,15 +16,15 @@
 
     <!-- SERVICES -->
     <bean id="deliveryService" class="com.dto.delivery_tour_optimizer.service.DeliveryService">
-        <constructor-arg ref="deliveryRepository"/>
+        <property name="deliveryRepository" ref="deliveryRepository"/>
     </bean>
 
     <bean id="vehicleService" class="com.dto.delivery_tour_optimizer.service.VehicleService">
-        <constructor-arg ref="vehicleRepository"/>
+        <property name="vehicleRepository" ref="vehicleRepository"/>
     </bean>
 
     <bean id="warehouseService" class="com.dto.delivery_tour_optimizer.service.WarehouseService">
-        <constructor-arg ref="warehouseRepository"/>
+        <property name="warehouseRepository" ref="warehouseRepository"/>
     </bean>
 
     <bean id="tourService" class="com.dto.delivery_tour_optimizer.service.TourService">
@@ -34,6 +34,24 @@
         <property name="warehouseRepository" ref="warehouseRepository"/>
         <property name="nearestNeighborOptimizer" ref="nearestNeighborOptimizer"/>
         <property name="clarkeWrightOptimizer" ref="clarkeWrightOptimizer"/>
+    </bean>
+
+    <!-- CONTROLLERS -->
+    <bean id="tourController" class="com.dto.delivery_tour_optimizer.controller.TourController">
+        <property name="tourService" ref="tourService"/>
+    </bean>
+
+    <bean id="deliveryController" class="com.dto.delivery_tour_optimizer.controller.DeliveryController">
+        <property name="deliveryService" ref="deliveryService"/>
+        <property name="tourService" ref="tourService"/>
+    </bean>
+
+    <bean id="vehicleController" class="com.dto.delivery_tour_optimizer.controller.VehicleController">
+        <property name="vehicleService" ref="vehicleService"/>
+    </bean>
+
+    <bean id="warehouseController" class="com.dto.delivery_tour_optimizer.controller.WarehouseController">
+        <property name="warehouseService" ref="warehouseService"/>
     </bean>
 
 </beans>
