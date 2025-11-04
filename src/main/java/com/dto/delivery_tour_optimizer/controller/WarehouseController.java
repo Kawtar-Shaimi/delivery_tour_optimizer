@@ -11,14 +11,10 @@ import java.util.List;
 @RequestMapping("/api/warehouses")
 public class WarehouseController {
 
-    private WarehouseService warehouseService;
+    private final WarehouseService warehouseService;
 
-    public WarehouseController() {}
-
+    // CORRECTION : Constructeur avec injection
     public WarehouseController(WarehouseService warehouseService) {
-    }
-
-    public void setWarehouseService(WarehouseService warehouseService) {
         this.warehouseService = warehouseService;
     }
 

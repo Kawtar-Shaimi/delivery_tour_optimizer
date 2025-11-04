@@ -14,14 +14,8 @@ public class TourController {
 
     private TourService tourService;
 
-    public TourController() {}
-
-    // CORRECTION : Initialiser réellement le service
+    // Constructeur avec injection
     public TourController(TourService tourService) {
-        this.tourService = tourService;
-    }
-
-    public void setTourService(TourService tourService) {
         this.tourService = tourService;
     }
 

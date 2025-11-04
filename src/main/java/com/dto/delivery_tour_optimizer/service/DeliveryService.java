@@ -2,15 +2,17 @@ package com.dto.delivery_tour_optimizer.service;
 
 import com.dto.delivery_tour_optimizer.model.Delivery;
 import com.dto.delivery_tour_optimizer.repository.DeliveryRepository;
+import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 public class DeliveryService {
 
     private DeliveryRepository deliveryRepository;
 
-    public DeliveryService() {}
-
+    // INJECTE DANS LE CONSTRUCTEUR
     public DeliveryService(DeliveryRepository deliveryRepository) {
+        this.deliveryRepository = deliveryRepository;
     }
 
     public List<Delivery> getAllDeliveries() {
@@ -19,7 +21,7 @@ public class DeliveryService {
 
     public Delivery getDeliveryById(Long id) {
         return deliveryRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Livraison non trouvée"));
+                .orElseThrow(() -> new RuntimeException("Delivery not found with id: " + id));
     }
 
     public Delivery saveDelivery(Delivery delivery) {
@@ -28,10 +30,5 @@ public class DeliveryService {
 
     public void deleteDelivery(Long id) {
         deliveryRepository.deleteById(id);
-    }
-
-    // AJOUTER CE SETTER POUR L'INJECTION XML
-    public void setDeliveryRepository(DeliveryRepository deliveryRepository) {
-        this.deliveryRepository = deliveryRepository;
     }
 }

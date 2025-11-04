@@ -11,14 +11,10 @@ import java.util.List;
 @RequestMapping("/api/vehicles")
 public class VehicleController {
 
-    private VehicleService vehicleService;
+    private final VehicleService vehicleService;
 
-    public VehicleController() {}
-
+    // Constructeur avec injection
     public VehicleController(VehicleService vehicleService) {
-    }
-
-    public void setVehicleService(VehicleService vehicleService) {
         this.vehicleService = vehicleService;
     }
 

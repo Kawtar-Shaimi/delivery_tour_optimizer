@@ -3,12 +3,15 @@ package com.dto.delivery_tour_optimizer.service;
 import com.dto.delivery_tour_optimizer.dto.TourRequestDTO;
 import com.dto.delivery_tour_optimizer.model.*;
 import com.dto.delivery_tour_optimizer.repository.*;
+import lombok.Getter;
+import lombok.Setter;
 import java.util.List;
 import java.util.logging.Logger;
 
+@Getter
+@Setter
 public class TourService {
 
-    // Logger simple
     private static final Logger logger = Logger.getLogger(TourService.class.getName());
 
     private TourRepository tourRepository;
@@ -18,7 +21,22 @@ public class TourService {
     private TourOptimizer nearestNeighborOptimizer;
     private TourOptimizer clarkeWrightOptimizer;
 
-    public TourService() {}
+    // CONSTRUCTEUR CORRIGÉ
+    public TourService(TourRepository tourRepository,
+                       DeliveryRepository deliveryRepository,
+                       VehicleRepository vehicleRepository,
+                       WarehouseRepository warehouseRepository,
+                       TourOptimizer nearestNeighborOptimizer,
+                       TourOptimizer clarkeWrightOptimizer) {
+        this.tourRepository = tourRepository;
+        this.deliveryRepository = deliveryRepository;
+        this.vehicleRepository = vehicleRepository;
+        this.warehouseRepository = warehouseRepository;
+        this.nearestNeighborOptimizer = nearestNeighborOptimizer;
+        this.clarkeWrightOptimizer = clarkeWrightOptimizer;
+
+        logger.info("✅ TourService initialisé avec toutes les dépendances");
+    }
 
     public List<Delivery> getOptimizedTour(TourRequestDTO request) {
         logger.info("🚀 Demande d'optimisation - Algorithme: " + request.getOptimizerType());
@@ -92,28 +110,28 @@ public class TourService {
         return total;
     }
 
-    // Getters et Setters (inchangés)
-    public void setTourRepository(TourRepository tourRepository) {
-        this.tourRepository = tourRepository;
-    }
-
-    public void setDeliveryRepository(DeliveryRepository deliveryRepository) {
-        this.deliveryRepository = deliveryRepository;
-    }
-
-    public void setVehicleRepository(VehicleRepository vehicleRepository) {
-        this.vehicleRepository = vehicleRepository;
-    }
-
-    public void setWarehouseRepository(WarehouseRepository warehouseRepository) {
-        this.warehouseRepository = warehouseRepository;
-    }
-
-    public void setNearestNeighborOptimizer(TourOptimizer nearestNeighborOptimizer) {
-        this.nearestNeighborOptimizer = nearestNeighborOptimizer;
-    }
-
-    public void setClarkeWrightOptimizer(TourOptimizer clarkeWrightOptimizer) {
-        this.clarkeWrightOptimizer = clarkeWrightOptimizer;
-    }
+//    // Getters et Setters (inchangés)
+//    public void setTourRepository(TourRepository tourRepository) {
+//        this.tourRepository = tourRepository;
+//    }
+//
+//    public void setDeliveryRepository(DeliveryRepository deliveryRepository) {
+//        this.deliveryRepository = deliveryRepository;
+//    }
+//
+//    public void setVehicleRepository(VehicleRepository vehicleRepository) {
+//        this.vehicleRepository = vehicleRepository;
+//    }
+//
+//    public void setWarehouseRepository(WarehouseRepository warehouseRepository) {
+//        this.warehouseRepository = warehouseRepository;
+//    }
+//
+//    public void setNearestNeighborOptimizer(TourOptimizer nearestNeighborOptimizer) {
+//        this.nearestNeighborOptimizer = nearestNeighborOptimizer;
+//    }
+//
+//    public void setClarkeWrightOptimizer(TourOptimizer clarkeWrightOptimizer) {
+//        this.clarkeWrightOptimizer = clarkeWrightOptimizer;
+//    }
 }
