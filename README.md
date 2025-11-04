@@ -30,6 +30,10 @@ Application Spring Boot pour l'optimisation intelligente des tournées de livrai
 - **REST API**
 - **XML Configuration** (sans annotations d'injection)
 
+##  Diagramme de classe
+
+<img width="526" height="751" alt="Capture d&#39;écran 2025-11-04 170558" src="https://github.com/user-attachments/assets/cdcaf6dd-9780-489e-a809-bb7eb85d36cb" />
+
 ## 📊 Entités Métier
 
 ### 🚗 Vehicle
@@ -68,11 +72,11 @@ Application Spring Boot pour l'optimisation intelligente des tournées de livrai
 ### Prérequis
 - Java 17 ou supérieur
 - Maven 3.6+
-- IDE (IntelliJ, Eclipse, VS Code)
+- IDE IntelliJ
 
 ### Installation
 ```bash
-git clone [votre-repo]
+git clone delivery_tour_optimizer
 cd delivery_tour_optimizer
 mvn clean install
 ```
@@ -161,6 +165,11 @@ src/main/java/com/dto/delivery_tour_optimizer/
 - **Qualité** : SonarLint, Tests Unitaires
 - **Documentation** : Swagger/Postman
 
+## Capture d'écran
+
+
+<img width="1872" height="854" alt="Capture d&#39;écran 2025-11-04 170418" src="https://github.com/user-attachments/assets/2a708b40-f30b-46e1-b69d-047f2aaa8d17" />
+
 ## 🚧 Contraintes Techniques Respectées
 
 - ✅ Injection de dépendances via XML uniquement
@@ -182,5 +191,3 @@ Développé dans le cadre d'un projet de formation en ingénierie logicielle.
 
 **💡 Note** : Ce système permet de réduire significativement les coûts logistiques grâce à l'optimisation intelligente des tournées de livraison.
 ```
-
-Ce README couvre tous les aspects importants de votre projet et respecte les contraintes techniques spécifiées. Vous pouvez le personnaliser avec vos informations spécifiques (auteur, dates, etc.).
